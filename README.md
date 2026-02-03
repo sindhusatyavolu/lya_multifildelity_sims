@@ -117,5 +117,21 @@ On an interactive CPU node: salloc -N 1 -n 4 -c 32 --account desi --qos interact
 
 srun /global/cfs/cdirs/desi/users/sindhu_s/codes/amrex/Nyx/Util/Converters/Plotfile2HDF5_grids/convert3d.gnu.x86-milan.PROF.MPI.ex input_path=<path_to_plt_folder> output_path=<path_to_output+name_of_file(e.g., /pscratch/pltxxxx.hdf5)>
 
+### Gimlet 
+
+Gimlet (CPU version only):
+
+No config, give location of HDF5 file as input through command line. Optional arguments to be used if you want mean flux rescaling. 
+
+On an interactive CPU node: salloc -N 1 -n 4 -c 32 --account desi --qos interactive -C cpu -t 01:00:00 
+
+module load cray-fftw
+
+module load cray-hdf5-parallel
+
+srun /global/cfs/cdirs/desi/users/sindhu_s/codes/gimlet2_MW/apps/lya_all_axes_rhoT/lya_all_axes.ex -f <mean_flux_rescale_value> -d xyz <path_to_hdf5_file> <output_directory>
+
+
+
 
 
