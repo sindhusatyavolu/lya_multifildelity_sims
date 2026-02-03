@@ -105,6 +105,6 @@ export LD_LIBRARY_PATH=/global/cfs/cdirs/nyx/sundials_shared/sundials/instdir/li
 srun /global/cfs/cdirs/desi/users/sindhu_s/codes/amrex/Nyx/Exec/LyA/Nyx3d.gnu.TPROF.MTMPI.OMP.CUDA.ex <path_to_config>
 
 Hopefully your Nyx run was successful!
-You can look at the plt snapshots and plot them using yt. For details, yt.html
+You can look at the plt snapshots and plot them using yt. For details, [check here](https://warpx.readthedocs.io/en/latest/dataanalysis/yt.html)
 
 
