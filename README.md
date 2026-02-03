@@ -107,4 +107,15 @@ srun /global/cfs/cdirs/desi/users/sindhu_s/codes/amrex/Nyx/Exec/LyA/Nyx3d.gnu.TP
 Hopefully your Nyx run was successful!
 You can look at the plt snapshots and plot them using yt. For details, [check here](https://warpx.readthedocs.io/en/latest/dataanalysis/yt.html)
 
+#### Convert Nyx output to HDF5 (for gimlet):
+
+Under Utils, you will find the code to convert plt folders to HDF5 files. 
+
+Usage:
+
+On an interactive CPU node: salloc -N 1 -n 4 -c 32 --account desi --qos interactive -C cpu -t 01:00:00 
+
+srun /global/cfs/cdirs/desi/users/sindhu_s/codes/amrex/Nyx/Util/Converters/Plotfile2HDF5_grids/convert3d.gnu.x86-milan.PROF.MPI.ex input_path=<path_to_plt_folder> output_path=<path_to_output+name_of_file(e.g., /pscratch/pltxxxx.hdf5)>
+
+
 
