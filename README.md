@@ -133,7 +133,8 @@ module load cray-hdf5-parallel
 
 ln -s /global/cfs/cdirs/desi/users/sindhu_s/codes/gimlet2_MW/apps/lya_all_axes_rhoT/TREECOOL_ONO16_C000_T632 ../TREECOOL_ONO16_C000_T632
 
-srun /global/cfs/cdirs/desi/users/sindhu_s/codes/gimlet2_MW/apps/lya_all_axes_rhoT/lya_all_axes.ex -f <mean_flux_rescale_value> -d xyz <path_to_hdf5_file> <output_directory>
+srun /global/cfs/cdirs/desi/users/sindhu_s/codes/gimlet2_MW/apps/lya_all_axes_rhoT/lya_all_axes.ex -f <mean_flux_rescale_value> -d xyz <path_to_hdf5_file> <output_filename> #<output_filename> saves the gimlet files starting by output_filename_* in the parent directory of output_filename
+
 
 
 
