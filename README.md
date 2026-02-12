@@ -10,15 +10,22 @@ Repository of all codes/helpers to run low resolution Nyx simulations
 Use the conifg file under ICs/params/ or copy one of the ic files from lyssa (they are at /global/cfs/cdirs/desi/users/sindhu_s/codes/ini_conditions_Nyx/lyssa_grid/2lpt_ini/cosmo_grid<grid_number>/ and .ini file), edit the file to change:
 
 - Nmesh and Nsamples to 64
-- glasstilefrac to 1
-- Boxsize to 10000
+- GlassTileFac to 1
+- Box to 10000
 - GlassFile location to /global/cfs/cdirs/desi/users/sindhu_s/codes/ini_conditions_Nyx/camb_2lpt_files/dummy_glass_dm_only_from_2comp_64.dat
 - File with Transfer to /global/cfs/cdirs/desicollab/users/sindhu_s/codes/ini_conditions_Nyx/lyssa_grid/cosmo_grid<grid_number>/class_cosmo_grid<grid_number>transfer_function_z99.0
 - File with Input Spectrum to 
 /global/cfs/cdirs/desicollab/users/sindhu_s/codes/ini_conditions_Nyx/lyssa_grid/cosmo_grid<grid_number>/class_cosmo_grid<grid_number>power_spectrum_z99.0
+- FileBase to the name of the output file as desired
 - Outputdir to your scratch folder
 
+  Note that OmegaBaryon is 0.0 when generating ICs for a single particle species (DM only). This is the default.
+
 #### Run 2lptic :  (recommended to run on interactive node with module load python – I’ve checked that both these run succesfully on nersc-python, which has pynbody v2.0.0)
+
+on NERSC
+
+module load python
 
 Usage: srun /global/cfs/cdirs/desi/users/sindhu_s/codes/ini_conditions_Nyx/2LPT/src/2lpt <path_to_your_config_file> 
 
@@ -51,19 +58,21 @@ Edit the following:
 
 - nyx.binary_particle_file = .nyx file location 
 
-- nyx.comoving_OmM = value from IC config
-
 - nyx.comoving_h   = value from IC config
 
-- amr.check_file = <outputdir>/chk
+- nyx.comoving_OmM = 0.2740036204390297 # should be same as the value of Omega in IC config file
 
-- amr.plot_file  = <outputdir>/plt
+- nyx.comoving_OmB = 0.04938726593811469 # your value; in the IC file, this value is set to zero, if you are using 1 particle 
+
+- amr.check_file = <location_of_outputdir>/chk; for example /usr/home/chk creates checkpoint folders chkxxxx within the directory /usr/home/, where xxxx is the Nyx timestep number 
+
+- amr.plot_file  = <location_of_outputdir>/plt; for example /usr/home/plt creates plt folders pltxxxx within the directory /usr/home/, where xxxx is the Nyx timestep number
 
 - nyx.plot_z_values = 6.0 5.0 4.0 3.0 2.0 (for example)
 
 - nyx.analysis_z_values 
 
-- nyx.uvb_rates_file : path to TREECOOL_middle file
+- nyx.uvb_rates_file : path to TREECOOL_middle file (under UVB rates directory)
 
 - nyx.initial_z = 99.0
 
@@ -71,22 +80,15 @@ Edit the following:
 
 - amr.checkpoint_files_output = 1 # if you want checkpoint files which can be used to restart the simulation from a given checkpoint redshift
 
-- amr.check_int         = 100 # saves checkpoint for every 100 timesteps
+- amr.check_int         = 100 # saves checkpoint for every 100 timesteps; set to a value that you wish
 
-- amr.checkpoint_nfiles = 64 # number of checkpoint files written in parallel
+- amr.checkpoint_nfiles = 64 # number of checkpoint files written in parallel; set to a value that you wish
 
 - amr.plot_files_output = 1 # should be 1 to save outputs i.e;  plt snapshots
 
-- nyx.h_species = 0.76
+- amr.derive_plot_vars=particle_mass_density particle_count particle_x_velocity particle_y_velocity particle_z_velocity # what quantities to save in the output, these are the miniumum necessary for computing lya flux, you may add more parameters if you wish
 
-- nyx.he_species = 0.24
-
-- amr.derive_plot_vars=particle_mass_density particle_count particle_x_velocity particle_y_velocity particle_z_velocity
-
-- amr.checkpoint_files_output = 1
-
-
-Make sure the cosmological parameters are same in the IC config and Nyx config
+- amr.checkpoint_files_output = 1 # can set to zero if you do not want checkpoints to be written
 
 initial z should be the same as the z at which ICs were generated (z=99 if you are using camb files from lyssa). You can choose the number of redshifts to be saved, and the location of outputs.
 
